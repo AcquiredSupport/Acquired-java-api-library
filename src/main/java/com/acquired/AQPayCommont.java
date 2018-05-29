@@ -1,4 +1,4 @@
-package com.Acquired.helper;
+package com.acquired;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -83,6 +83,17 @@ public class AQPayCommont {
 		
 	}
 	
+	public String generateWebhookHash(JsonObject param) throws Exception{
+		
+		String hash_map = param.get("id").getAsString() + param.get("timestamp").getAsString() + param.get("company_id").getAsString() + param.get("event").getAsString();
+		String hash_map2 = sha256hash(hash_map);
+		hash_map2 = hash_map2 + param.get("company_hash_code").getAsString();
+		String hash = sha256hash(hash_map2);
+		
+		return hash;
+		
+	}
+	
 	
 	public String client_ip(HttpServletRequest request) {
 		
@@ -112,18 +123,18 @@ public class AQPayCommont {
 		return http_request(url, data, connectTimeout, "");
 	}
 	
-	public String http_request(String url, String data, int connectTimeout, String type) throws Exception {
+	public String http_request(String url, String data, int connectTimeout, String dataType) throws Exception {
         PrintWriter out = null;
         String result = "";
                 
         try {
             URL realUrl = new URL(url); 
             HttpURLConnection conn = (HttpURLConnection)realUrl.openConnection();
-                                  
-            switch(type) {
-            		case "json":conn.setRequestProperty("Content-type", "application/json");break;
-            		default:break;
+                                            
+            if(dataType == "json") {
+            		conn.setRequestProperty("Content-type", "application/json");
             }
+            
             conn.setRequestMethod("POST");
             conn.setConnectTimeout(connectTimeout*1000);
                         

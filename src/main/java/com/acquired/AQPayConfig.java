@@ -1,4 +1,4 @@
-package com.Acquired.helper;
+package com.acquired;
 
 public class AQPayConfig {	
 	

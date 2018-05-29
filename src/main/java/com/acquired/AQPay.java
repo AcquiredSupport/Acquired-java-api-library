@@ -1,4 +1,4 @@
-package com.Acquired.helper;
+package com.acquired;
 
 import java.util.Arrays;
 import java.util.HashMap;

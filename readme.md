@@ -24,7 +24,7 @@ Add this dependency to your project's POM:
 <dependency>
     <groupId>com.acquired</groupId>
     <artifactId>acquired-java-api-library</artifactId>
-    <version>1.0.1</version>	    
+    <version>1.0.2</version>	    
 </dependency>
 ```
 

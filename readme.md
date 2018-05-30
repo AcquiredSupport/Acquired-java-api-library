@@ -5,25 +5,11 @@ The Acquired API Library for Java enables you to work with Acquired APIs.
 
 ## Directory ##
 ```html
-|--WebContent.examples   (html files)
-    |--public
-        |--css
-            general.css
-    auth_.html    
-    refund.html
-    ...
-|--src.com.Acquired
-    |--form   (recieve html post data)
-        Auth_.java
-        Refund.java
-    |--helper   (Acquired api sdk)
-        AQPay.java
-        AQPayCommont.java
-        AQPayConfig.java
-|--WebContent.WEB-INF.lib  
-    gson-2.7.jar
+|--src.main.java.com.acquired
+    AQPay.java
+    AQPayCommont.java
+pom.xml
 readme.md  
-index.html
 ``` 
 
 ## Documentation  ##
@@ -32,14 +18,25 @@ https://docs.acquired.com/api.php
 ## Installation ##
 You can simply Download the Release
 
+### Maven ###
+Add this dependency to your project's POM:
+```java
+<dependency>
+    <groupId>com.acquired</groupId>
+    <artifactId>acquired-java-api-library</artifactId>
+    <version>1.1.1</version>	    
+</dependency>
+```
+
+
+
 ## Examples ##
 #### Get start
 
-1. set config parameters in AQPayConfig.java.
-2. import the below file in the example files.
+1. import the below file in the example files.
 
 ```php
-import com.Acquired.helper.AQPay;
+import com.acquired.*;
 ```
 
 #### How to use
@@ -64,6 +61,8 @@ if(aqpay.isSignatureValid(result)) {
     
 }
 ```
+The code examples on using this library are located in the library section of the api-sdk-java repository: https://github.com/AcquiredSupport/Acquired-api-sdk-java
+
 
 ## Requirements
 

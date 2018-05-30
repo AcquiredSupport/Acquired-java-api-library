@@ -122,7 +122,7 @@ public class AQPayCommont {
 		return http_request(url, data, connectTimeout, "");
 	}
 	
-	public String http_request(String url, String data, int connectTimeout, String type) throws Exception {
+	public String http_request(String url, String data, int connectTimeout, String dataType) throws Exception {
         PrintWriter out = null;
         String result = "";
                 
@@ -130,9 +130,8 @@ public class AQPayCommont {
             URL realUrl = new URL(url); 
             HttpURLConnection conn = (HttpURLConnection)realUrl.openConnection();
                                   
-            switch(type) {
-            		case "json":conn.setRequestProperty("Content-type", "application/json");break;
-            		default:break;
+            if(dataType == "json") {
+            		conn.setRequestProperty("Content-type", "application/json");            		
             }
             conn.setRequestMethod("POST");
             conn.setConnectTimeout(connectTimeout*1000);

@@ -16,7 +16,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.security.*;
 
-public class AQPayCommont {
+public class AQPayCommon {
 
 	
 	public String trimString(String value) throws Exception {	

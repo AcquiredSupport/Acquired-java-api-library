@@ -33,7 +33,7 @@ import com.google.gson.JsonParser;
 
 public class AQPay {
 	
-	protected AQPayCommont util = new AQPayCommont();
+	protected AQPayCommon util = new AQPayCommon();
 	protected Map<String, String> param = new HashMap<String, String>();	
 	protected int connectTimeout;
 	

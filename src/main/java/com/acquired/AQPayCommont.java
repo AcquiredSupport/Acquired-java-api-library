@@ -94,7 +94,6 @@ public class AQPayCommont {
 		
 	}
 	
-	
 	public String client_ip(HttpServletRequest request) {
 		
 		String remoteAddr = request.getRemoteAddr();
@@ -123,18 +122,18 @@ public class AQPayCommont {
 		return http_request(url, data, connectTimeout, "");
 	}
 	
-	public String http_request(String url, String data, int connectTimeout, String dataType) throws Exception {
+	public String http_request(String url, String data, int connectTimeout, String type) throws Exception {
         PrintWriter out = null;
         String result = "";
                 
         try {
             URL realUrl = new URL(url); 
             HttpURLConnection conn = (HttpURLConnection)realUrl.openConnection();
-                                            
-            if(dataType == "json") {
-            		conn.setRequestProperty("Content-type", "application/json");
+                                  
+            switch(type) {
+            		case "json":conn.setRequestProperty("Content-type", "application/json");break;
+            		default:break;
             }
-            
             conn.setRequestMethod("POST");
             conn.setConnectTimeout(connectTimeout*1000);
                         

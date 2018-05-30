@@ -34,14 +34,12 @@ import com.google.gson.JsonParser;
 public class AQPay {
 	
 	protected AQPayCommont util = new AQPayCommont();
-	protected Map<String, String> param = new HashMap<String, String>();
-	protected String url;
+	protected Map<String, String> param = new HashMap<String, String>();	
 	protected int connectTimeout;
 	
 	public AQPay() {
-		
-		this.url = AQPayConfig.REQUESTURL;
-		this.connectTimeout = AQPayConfig.CURLTIMEOUT;
+				
+		this.connectTimeout = 120;
 		
 	}
 	
@@ -58,24 +56,23 @@ public class AQPay {
 	
 	private void setBasicParam() throws Exception {
 		
-		this.param.put("company_id", AQPayConfig.COMPANYID);
-		this.param.put("company_pass", AQPayConfig.COMPANYPASS);
-		this.param.put("company_mid_id", AQPayConfig.COMPANYMIDID);
+		this.param.put("company_id", this.param.get("company_id"));
+		this.param.put("company_pass", this.param.get("company_pass"));
+		this.param.put("company_mid_id", this.param.get("company_mid_id"));
 		
 		this.param.put("timestamp", this.util.now());
-		String hashcode = AQPayConfig.HASHCODE;
+		String hashcode = this.param.get("hash_code");
 		this.param.put("request_hash", this.util.requestHash(this.param, hashcode));
 	}
 	
-	public String generateResHash(JsonObject data) throws Exception {
-		String hashcode = AQPayConfig.HASHCODE;
+	public String generateResHash(JsonObject data, String hashcode) throws Exception {		
 		return this.util.responseHash(data, hashcode);
 	}
 	
-	public Boolean isSignatureValid(JsonObject response) throws Exception{
+	public Boolean isSignatureValid(JsonObject response, String hashcode) throws Exception{
 		
 		String key = response.get("response_hash").getAsString();
-		String response_hash = this.generateResHash(response);
+		String response_hash = this.generateResHash(response, hashcode);
 		if(key.equals(response_hash)) {
 			return true;
 		}else {
@@ -171,8 +168,10 @@ public class AQPay {
 		}
 		
 		Gson gson = new Gson();
-		String json = gson.toJson(data);		
-		String response = this.util.http_request(this.url, json, this.connectTimeout, "json");
+		String json = gson.toJson(data);
+		String url = this.param.get("request_url");
+		
+		String response = this.util.http_request(url, json, this.connectTimeout, "json");
 		
 		JsonObject result = new JsonParser().parse(response).getAsJsonObject();				
 		

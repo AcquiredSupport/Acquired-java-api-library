@@ -13,7 +13,7 @@ readme.md
 ``` 
 
 ## Documentation  ##
-https://docs.acquired.com/api.php
+https://developer.acquired.com/integrations
 
 ## Installation ##
 You can simply Download the Release
